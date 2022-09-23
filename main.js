@@ -1,6 +1,12 @@
 const express = require('express');
 const brcypt = require('bcrypt');
 const cors = require('cors');
+const {
+    createProduct,
+    getAllProducts,
+    getProduct,
+    UpdateProductDetails
+ } = require('./controllers/product');
 
 const app = express();
 
@@ -14,17 +20,23 @@ const knex = require('knex')({
     client: 'pg',
     connection: {
       host : '127.0.0.1',
-      port : PORT,
-      user : 'your_database_user',
-      password : 'your_database_password',
-      database : 'myapp_test'
+      port : 5432,
+      user : 'postgres',
+      password : 'test',
+      database : 'test_db'
+    },
+    ssl: {
+        rejectUnauthorized: false
     }
 });
 
 
-app.get('/api/', (req, res) => {
-    res.send('HELLO WORLD, I AM ALIVE!!');
-})
+app.get('/api/products', (req, res) => { getAllProducts(req, res, knex) });
+app.post('/api/products', (req, res) => { createProduct(req, res, knex) });
+app.get('/api/products/:id', (req, res) => { getProduct(req, res, knex) });
+app.put('/api/products/:id', (req, res) => { UpdateProductDetails(req, res, knex) });
+
+
 
 app.listen(PORT, () => {
     console.log(`Server is Listening at ${PORT}`);
