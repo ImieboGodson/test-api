@@ -5,11 +5,11 @@ This is a REST API  built for learning purposes, it is set up to expose endpoint
 
 ```
 # Available Routes
-GET      /api/products
-POST     /api/products
-GET      /api/products/:id
-PUT      /api/products/:id
-DELETE   /api/products/:id
+GET      /api/products           -->  Returns all products
+POST     /api/products/add       -->  Creates a new Products
+GET      /api/products/:id       -->  Returns the product with the id passed
+PUT      /api/products/update    -->  Updates product details
+DELETE   /api/products/delete    -->  Deletes the product with the id passed
 
 ```
 
