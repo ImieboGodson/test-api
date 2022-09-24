@@ -5,7 +5,8 @@ const {
     createProduct,
     getAllProducts,
     getProduct,
-    UpdateProductDetails
+    UpdateProductDetails,
+    deleteProduct
  } = require('./controllers/product');
 
 const app = express();
@@ -35,6 +36,7 @@ app.get('/api/products', (req, res) => { getAllProducts(req, res, knex) });
 app.post('/api/products', (req, res) => { createProduct(req, res, knex) });
 app.get('/api/products/:id', (req, res) => { getProduct(req, res, knex) });
 app.put('/api/products/:id', (req, res) => { UpdateProductDetails(req, res, knex) });
+app.delete('/api/products/:id', (req, res) => { deleteProduct(req, res, knex) });
 
 
 

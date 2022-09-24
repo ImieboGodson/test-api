@@ -20,6 +20,10 @@ const createProduct = (req, res, knex) => {
     }
 }
 
+
+//GETS ALL PRODUCTS
+//ROUTE /api/products/
+//TYPE  GET
 const getAllProducts = (req, res, knex) => {
 
     knex.select('*')
@@ -36,6 +40,10 @@ const getAllProducts = (req, res, knex) => {
         })
 }
 
+
+//GETS A PRODUCT BY ID
+//ROUTE /api/products/:id
+//TYPE  GET
 const getProduct = (req, res, knex) => {
     const { id } = req.params;
 
@@ -55,6 +63,10 @@ const getProduct = (req, res, knex) => {
         })
 }
 
+
+//UPDATE PRODUCT
+//ROUTE /api/products/:id
+//TYPE  PUT
 const UpdateProductDetails = (req, res, knex) => {
     const { id } = req.params;
 
@@ -81,12 +93,37 @@ const UpdateProductDetails = (req, res, knex) => {
                 return res.status(404).json('Unable to edit product');
             })
     }
-    
+}
+
+
+//DELETES PRODUCT
+//ROUTE /api/products/:id
+//TYPE  DELETE
+const deleteProduct = (req, res, knex) => {
+    const { id } = req.params;
+
+    knex('products')
+        .where('id', '=', id)
+        .del()
+        // .returning('*')
+        .then(data => {
+            // console.log(data)
+            if(data.length) {
+                res.json(data);
+            } else {
+                res.json('Product Successfully Deleted');
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(400).json('Error While Deleting Product')
+        })
 }
 
 module.exports = {
     createProduct,
     getAllProducts,
     getProduct,
-    UpdateProductDetails
+    UpdateProductDetails,
+    deleteProduct
 }
