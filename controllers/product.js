@@ -40,6 +40,7 @@ const getAllProducts = (knex) => (req, res) => {
             }
         })
         .catch(err => {
+            console.log(err)
             return res.status(404).json('Unable to select products');
         })
 }
@@ -63,6 +64,7 @@ const getProduct = (knex) => (req, res) => {
             }
         })
         .catch(err => {
+            console.log(err)
             return res.status(404).json('Unable to return product');
         })
 }
@@ -94,6 +96,7 @@ const UpdateProductDetails = (knex) => (req, res) => {
                 }
             })
             .catch(err => {
+                console.log(err)
                 return res.status(404).json('Unable to update product');
             })
     }
