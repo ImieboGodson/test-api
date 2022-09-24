@@ -3,13 +3,7 @@ const brcypt = require('bcrypt');
 const cors = require('cors');
 require('dotenv').config();
 
-const {
-    createProduct,
-    getAllProducts,
-    getProduct,
-    UpdateProductDetails,
-    deleteProduct
- } = require('./controllers/product');
+const product = require('./controllers/product');
 
 const PORT = process.env.PORT || 5055;
 
@@ -42,11 +36,11 @@ const knex = require('knex')({
 });
 
 
-app.get('/api/products', (req, res) => { getAllProducts(req, res, knex) });
-app.post('/api/products', (req, res) => { createProduct(req, res, knex) });
-app.get('/api/products/:id', (req, res) => { getProduct(req, res, knex) });
-app.put('/api/products/:id', (req, res) => { UpdateProductDetails(req, res, knex) });
-app.delete('/api/products/:id', (req, res) => { deleteProduct(req, res, knex) });
+app.get('/api/products', product.getAllProducts(knex));
+app.post('/api/products/add', product.createProduct(knex));
+app.get('/api/products/:id', product.getProduct(knex));
+app.put('/api/products/update', product.UpdateProductDetails(knex));
+app.delete('/api/products/delete', product.deleteProduct(knex));
 
 
 

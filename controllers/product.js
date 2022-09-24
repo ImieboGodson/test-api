@@ -1,7 +1,7 @@
 //ADD NEW PRODUCT
-//ROUTE /api/products/
+//ROUTE /api/products/add
 //TYPE  POST
-const createProduct = (req, res, knex) => {
+const createProduct = (knex) => (req, res) => {
     const { name, description } = req.body;
 
     if( !name || !description ) {
@@ -27,7 +27,7 @@ const createProduct = (req, res, knex) => {
 //GETS ALL PRODUCTS
 //ROUTE /api/products/
 //TYPE  GET
-const getAllProducts = (req, res, knex) => {
+const getAllProducts = (knex) => (req, res) => {
 
     knex.select('*')
         .from('products')
@@ -47,7 +47,7 @@ const getAllProducts = (req, res, knex) => {
 //GETS A PRODUCT BY ID
 //ROUTE /api/products/:id
 //TYPE  GET
-const getProduct = (req, res, knex) => {
+const getProduct = (knex) => (req, res) => {
     const { id } = req.params;
 
     knex.select('*')
@@ -62,20 +62,20 @@ const getProduct = (req, res, knex) => {
             }
         })
         .catch(err => {
-            return res.status(404).json('Unable to select product');
+            return res.status(404).json('Unable to return product');
         })
 }
 
 
 //UPDATE PRODUCT
-//ROUTE /api/products/:id
+//ROUTE /api/products/update
 //TYPE  PUT
-const UpdateProductDetails = (req, res, knex) => {
-    const { id } = req.params;
+const UpdateProductDetails = (knex) => (req, res) => {
+    // const { id } = req.params;
 
-    const { name, description } = req.body;
+    const { id, name, description } = req.body;
 
-    if(!name && !description) {
+    if(!name || !description) {
         res.status(404).json("You Can't Leave Fields Empty")
     } else {
         knex('products')
@@ -93,17 +93,17 @@ const UpdateProductDetails = (req, res, knex) => {
                 }
             })
             .catch(err => {
-                return res.status(404).json('Unable to edit product');
+                return res.status(404).json('Unable to update product');
             })
     }
 }
 
 
 //DELETES PRODUCT
-//ROUTE /api/products/:id
+//ROUTE /api/products/delete
 //TYPE  DELETE
-const deleteProduct = (req, res, knex) => {
-    const { id } = req.params;
+const deleteProduct = (knex) => (req, res) => {
+    const { id } = req.body;
 
     knex('products')
         .where('id', '=', id)
