@@ -1,3 +1,6 @@
+//ADD NEW PRODUCT
+//ROUTE /api/products/
+//TYPE  POST
 const createProduct = (req, res, knex) => {
     const { name, description } = req.body;
 

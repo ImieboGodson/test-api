@@ -3,7 +3,7 @@
 
 This is a REST API  built for learning purposes, it is set up to expose endpoints that are useful for my projects.
 
-<!-- ```
+```
 # Available Routes
 GET      /api/products
 POST     /api/products
@@ -11,7 +11,7 @@ GET      /api/products/:id
 PUT      /api/products/:id
 DELETE   /api/products/:id
 
-``` -->
+```
 
 ## Usage
 

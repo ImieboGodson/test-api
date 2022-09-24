@@ -1,6 +1,8 @@
 const express = require('express');
 const brcypt = require('bcrypt');
 const cors = require('cors');
+require('dotenv').config();
+
 const {
     createProduct,
     getAllProducts,
@@ -9,22 +11,30 @@ const {
     deleteProduct
  } = require('./controllers/product');
 
+const PORT = process.env.PORT || 5055;
+
+const {
+    DATABASE_NAME,
+    DATABASE_PORT,
+    DATABASE_USER,
+    DATABASE_PASSWORD
+} = process.env
+
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-const PORT = process.env.PORT || 5055;
 
 const knex = require('knex')({
     client: 'pg',
     connection: {
       host : '127.0.0.1',
-      port : 5432,
-      user : 'postgres',
-      password : 'test',
-      database : 'test_db'
+      port : DATABASE_PORT,
+      user : DATABASE_USER,
+      password : DATABASE_PASSWORD,
+      database : DATABASE_NAME
     },
     ssl: {
         rejectUnauthorized: false
