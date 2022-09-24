@@ -25,10 +25,10 @@ const knex = require('knex')({
     client: 'pg',
     connection: {
       host : '127.0.0.1',
-      port : DATABASE_PORT,
-      user : DATABASE_USER,
-      password : DATABASE_PASSWORD,
-      database : DATABASE_NAME
+      port : '5432',
+      user : 'postgres',
+      password : 'test',
+      database : 'test_db'
     },
     ssl: {
         rejectUnauthorized: false
