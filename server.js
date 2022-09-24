@@ -7,12 +7,12 @@ const product = require('./controllers/product');
 
 const PORT = process.env.PORT || 5055;
 
-const {
-    DATABASE_NAME,
-    DATABASE_PORT,
-    DATABASE_USER,
-    DATABASE_PASSWORD
-} = process.env
+// const {
+//     DATABASE_NAME,
+//     DATABASE_PORT,
+//     DATABASE_USER,
+//     DATABASE_PASSWORD
+// } = process.env
 
 const app = express();
 
