@@ -18,6 +18,7 @@ const createProduct = (knex) => (req, res) => {
                 return res.send(data[0]);
             })
             .catch(err => {
+                console.log(err)
                 return res.status(400).json('A error occurred while creating product');
             })
     }
